@@ -7,7 +7,18 @@ import ru.smirnov.intership.r.test.ArrayFilterMapLexer
 import ru.smirnov.intership.r.test.ArrayFilterMapParser
 import ru.smirnov.intership.r.test.parser.visitors.CallChainVisitor
 
+/**
+ * Class for parsing chain call to tree.
+ *
+ * Uses AntLR
+ */
 class Parser {
+    /**
+     * Parses input and returns `CallChain` tree.
+     *
+     * @throws ParserException if parsing was not finished. Usually this means that
+     *          `input` has syntax error
+     */
     fun parse(input: String): CallChain {
         try {
             val lexer = ArrayFilterMapLexer(CharStreams.fromString(input))

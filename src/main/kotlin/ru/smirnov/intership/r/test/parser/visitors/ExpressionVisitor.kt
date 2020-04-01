@@ -4,6 +4,7 @@ import ru.smirnov.intership.r.test.ArrayFilterMapBaseVisitor
 import ru.smirnov.intership.r.test.ArrayFilterMapParser
 import ru.smirnov.intership.r.test.grammar.components.*
 
+/** Parses expressions */
 class ExpressionVisitor : ArrayFilterMapBaseVisitor<Expression>() {
     override fun visitBinaryExpression(ctx: ArrayFilterMapParser.BinaryExpressionContext): Expression {
         return BinaryExpression(ctx.expression(0).accept(this),

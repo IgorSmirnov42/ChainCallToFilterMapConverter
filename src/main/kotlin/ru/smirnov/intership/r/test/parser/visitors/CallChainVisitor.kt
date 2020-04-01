@@ -5,6 +5,7 @@ import ru.smirnov.intership.r.test.ArrayFilterMapParser
 import ru.smirnov.intership.r.test.grammar.components.CallChain
 import ru.smirnov.intership.r.test.grammar.components.CallChainBuilder
 
+/** Parses call chain */
 class CallChainVisitor : ArrayFilterMapBaseVisitor<CallChain>() {
     override fun visitCallChain(ctx: ArrayFilterMapParser.CallChainContext): CallChain {
         val callChainBuilder = CallChainBuilder()

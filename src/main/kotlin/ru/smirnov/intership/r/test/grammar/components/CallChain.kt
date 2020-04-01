@@ -1,5 +1,8 @@
 package ru.smirnov.intership.r.test.grammar.components
 
+/**
+ * One sequence of command to be executed on array.
+ */
 class CallChain(val calls: List<Call>) {
     fun <T> accept(visitor: ComponentVisitor<T>): T? {
         return visitor.visitCallChain(this)
@@ -21,9 +24,13 @@ class CallChain(val calls: List<Call>) {
     }
 }
 
+/**
+ * Simple builder for `CallChain` that adds calls to list and creates `CallChain`.
+ */
 class CallChainBuilder {
     private val calls = mutableListOf<Call>()
 
+    /** Adds `newCall` to the back of list of calls */
     fun add(newCall: Call) {
         calls.add(newCall)
     }

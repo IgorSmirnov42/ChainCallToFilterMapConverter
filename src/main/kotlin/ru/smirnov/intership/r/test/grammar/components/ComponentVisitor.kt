@@ -1,5 +1,10 @@
 package ru.smirnov.intership.r.test.grammar.components
 
+/**
+ * Visitor for all components of a grammar.
+ *
+ * @param T -- each method will return result of `T?` type. By default, all methods return null
+ */
 interface ComponentVisitor<T> {
     fun visitBinaryExpression(expression: BinaryExpression): T? {
         expression.leftExpression.accept(this)

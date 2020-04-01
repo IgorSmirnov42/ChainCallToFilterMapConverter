@@ -7,7 +7,16 @@ import ru.smirnov.intership.r.test.typecheck.TypeChecker
 import ru.smirnov.intership.r.test.typecheck.TypeErrorException
 import java.lang.Exception
 
+/**
+ * Class for conversion from chain call in any form to <filter-call> <map-call> form
+ */
 object CallChainToFilterMap {
+    /**
+     * Performs converion.
+     *
+     * @throws ParserException if `input` has syntax errors
+     * @throws TypeErrorException if `input` has type errors
+     */
     fun doConversion(input: String): String {
         val chainCall = Parser().parse(input)
         TypeChecker().checkTypes(chainCall)

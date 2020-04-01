@@ -6,6 +6,7 @@ import ru.smirnov.intership.r.test.grammar.components.Call
 import ru.smirnov.intership.r.test.grammar.components.FilterCall
 import ru.smirnov.intership.r.test.grammar.components.MapCall
 
+/** Parses call */
 class CallVisitor : ArrayFilterMapBaseVisitor<Call>() {
     override fun visitMapCall(ctx: ArrayFilterMapParser.MapCallContext): Call {
         return MapCall(ctx.expression().accept(ExpressionVisitor()))

@@ -2,6 +2,9 @@ package ru.smirnov.intership.r.test.converter
 
 import ru.smirnov.intership.r.test.grammar.components.*
 
+/**
+ * Visitor for conversion from chain to <filter-call> <map-call> form
+ */
 class FilterMapConversionVisitor : ComponentVisitor<CallChain> {
     private var currentFilter: Expression? = null
     private var currentMap: Expression = ElementExpression()
@@ -30,6 +33,11 @@ class FilterMapConversionVisitor : ComponentVisitor<CallChain> {
     }
 }
 
+/**
+ * Visitor that substitutes all `Element` occurrences to `newElement`.
+ *
+ * Does not change tree. Creates new tree.
+ */
 private class SubstituteElementVisitor(private val newElement: Expression) : ComponentVisitor<Expression> {
     override fun visitBinaryExpression(expression: BinaryExpression): Expression? {
         return BinaryExpression(expression.leftExpression.accept(this)!!,

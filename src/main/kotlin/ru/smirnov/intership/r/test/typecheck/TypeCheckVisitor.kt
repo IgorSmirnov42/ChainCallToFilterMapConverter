@@ -2,6 +2,11 @@ package ru.smirnov.intership.r.test.typecheck
 
 import ru.smirnov.intership.r.test.grammar.components.*
 
+/**
+ * Type checking first visitor.
+ *
+ * Delegates cheking to boolean and integer checkers
+ */
 class TypeCheckVisitor : ComponentVisitor<Unit> {
     override fun visitFilterCall(call: FilterCall) {
         call.expression.accept(BooleanExpressionTypeCheckVisitor())
@@ -12,6 +17,7 @@ class TypeCheckVisitor : ComponentVisitor<Unit> {
     }
 }
 
+/** Checks expression that should have integer return type */
 private class IntegerExpressionTypeCheckVisitor : ComponentVisitor<Unit> {
     override fun visitBinaryExpression(expression: BinaryExpression) {
         val operandsVisitor = when (expression.operation) {
@@ -23,6 +29,7 @@ private class IntegerExpressionTypeCheckVisitor : ComponentVisitor<Unit> {
     }
 }
 
+/** Checks expression that should have boolean return type */
 private class BooleanExpressionTypeCheckVisitor : ComponentVisitor<Unit> {
     override fun visitElementExpression(expression: ElementExpression) {
         throw TypeErrorException("Boolean expression expected, element found")

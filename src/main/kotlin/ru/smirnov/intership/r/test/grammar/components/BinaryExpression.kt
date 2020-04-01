@@ -1,5 +1,8 @@
 package ru.smirnov.intership.r.test.grammar.components
 
+/**
+ * Class for storing binary expression operation over two integers or over two booleans
+ */
 class BinaryExpression(val leftExpression: Expression,
                        val rightExpression: Expression,
                        val operation: Operation) : Expression {
