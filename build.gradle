@@ -4,10 +4,13 @@ plugins {
     id 'antlr'
 }
 
-group 'org.example'
+apply plugin: 'application'
+group 'ru.smirnov.intership'
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
+
+mainClassName = "ru.smirnov.intership.r.test.CallChainToFilterMapKt"
 
 generateGrammarSource {
     maxHeapSize = "256m"
@@ -27,6 +30,10 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-reflect"
     compile "org.antlr:antlr4-runtime:4.7.2"
     antlr "org.antlr:antlr4:4.7.2"
+}
+
+run {
+    standardInput = System.in
 }
 
 compileKotlin {
