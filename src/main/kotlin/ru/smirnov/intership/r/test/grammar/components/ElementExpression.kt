@@ -5,11 +5,11 @@ class ElementExpression : Expression {
         return visitor.visitElementExpression(this)
     }
 
-    override fun equals(other: Any?): Boolean {
-        return other is ElementExpression
+    override fun buildString(builder: StringBuilder) {
+        builder.append("element")
     }
 
-    override fun toString(): String {
-        return "element"
+    override fun equals(other: Any?): Boolean {
+        return other is ElementExpression
     }
 }

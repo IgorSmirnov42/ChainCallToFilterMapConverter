@@ -5,11 +5,13 @@ class FilterCall(val expression: Expression) : Call {
         return visitor.visitFilterCall(this)
     }
 
-    override fun equals(other: Any?): Boolean {
-        return other is FilterCall && other.expression == expression
+    override fun buildString(builder: StringBuilder) {
+        builder.append("filter{")
+        expression.buildString(builder)
+        builder.append("}")
     }
 
-    override fun toString(): String {
-        return "filter{$expression}"
+    override fun equals(other: Any?): Boolean {
+        return other is FilterCall && other.expression == expression
     }
 }

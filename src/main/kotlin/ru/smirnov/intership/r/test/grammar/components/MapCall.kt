@@ -5,11 +5,13 @@ class MapCall(val expression: Expression) : Call {
         return visitor.visitMapCall(this)
     }
 
-    override fun equals(other: Any?): Boolean {
-        return other is MapCall && other.expression == expression
+    override fun buildString(builder: StringBuilder) {
+        builder.append("map{")
+        expression.buildString(builder)
+        builder.append("}")
     }
 
-    override fun toString(): String {
-        return "map{$expression}"
+    override fun equals(other: Any?): Boolean {
+        return other is MapCall && other.expression == expression
     }
 }

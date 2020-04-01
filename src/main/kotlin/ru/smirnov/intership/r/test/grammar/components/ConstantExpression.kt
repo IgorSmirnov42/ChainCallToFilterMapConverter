@@ -5,11 +5,11 @@ class ConstantExpression(val number: String) : Expression {
         return visitor.visitConstantExpression(this)
     }
 
-    override fun equals(other: Any?): Boolean {
-        return other is ConstantExpression && other.number == this.number
+    override fun buildString(builder: StringBuilder) {
+        builder.append(number)
     }
 
-    override fun toString(): String {
-        return number
+    override fun equals(other: Any?): Boolean {
+        return other is ConstantExpression && other.number == this.number
     }
 }

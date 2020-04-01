@@ -10,7 +10,14 @@ class CallChain(val calls: List<Call>) {
     }
 
     override fun toString(): String {
-        return calls.joinToString(separator = "%>%")
+        val builder = StringBuilder()
+        for ((call, id) in (calls zip calls.indices)) {
+            if (id != 0) {
+                builder.append("%>%")
+            }
+            call.buildString(builder)
+        }
+        return builder.toString()
     }
 }
 

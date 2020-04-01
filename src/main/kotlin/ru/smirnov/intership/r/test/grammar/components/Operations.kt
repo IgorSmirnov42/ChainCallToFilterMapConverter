@@ -1,9 +1,12 @@
 package ru.smirnov.intership.r.test.grammar.components
 
 import java.lang.IllegalArgumentException
+import java.lang.StringBuilder
 
 sealed class Operation {
-    abstract override fun toString(): String
+    fun buildString(builder: StringBuilder) {
+        builder.append(toString())
+    }
 
     companion object {
         fun fromString(operation: String): Operation {
