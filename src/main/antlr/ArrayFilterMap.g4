@@ -69,3 +69,6 @@ DIGIT
     : [0-9]
     ;
 
+ErrorCharacter
+    : .
+    ;

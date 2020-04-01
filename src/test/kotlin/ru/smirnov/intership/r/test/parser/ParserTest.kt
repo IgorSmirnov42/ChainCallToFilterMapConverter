@@ -301,4 +301,34 @@ class ParserTest {
         )
         assertEquals(expected, Parser().parse("filter{(1=0)}%>%map{element}"))
     }
+
+    @Test(expected = ParserException::class)
+    fun shouldThrowOnIncorrectInput() {
+        Parser().parse("42")
+    }
+
+    @Test(expected = ParserException::class)
+    fun shouldThrowIfSomeSuffixWasNotParsed() {
+        Parser().parse("filter{(1=0)}%>%map{element}42")
+    }
+
+    @Test(expected = ParserException::class)
+    fun shouldThrowOnSpaces() {
+        Parser().parse("filter{(1 =0)}%>%map{element}")
+    }
+
+    @Test(expected = ParserException::class)
+    fun shouldThrowIfBracketsInBinaryExpressionAreMissed() {
+        Parser().parse("filter{1=0}%>%map{element}")
+    }
+
+    @Test(expected = ParserException::class)
+    fun shouldThrowIfExtraBracketsAreInserted() {
+        Parser().parse("filter{(1=0)}%>%map{(element)}")
+    }
+
+    @Test(expected = ParserException::class)
+    fun shouldThrowOnEmptyInput() {
+        Parser().parse("")
+    }
 }
