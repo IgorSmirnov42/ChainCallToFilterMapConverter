@@ -5,7 +5,6 @@ import ru.smirnov.intership.r.test.parser.Parser
 import ru.smirnov.intership.r.test.parser.ParserException
 import ru.smirnov.intership.r.test.typecheck.TypeChecker
 import ru.smirnov.intership.r.test.typecheck.TypeErrorException
-import java.lang.Exception
 
 /**
  * Class for conversion from chain call in any form to <filter-call> <map-call> form
