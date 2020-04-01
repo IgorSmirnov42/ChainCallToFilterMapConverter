@@ -14,11 +14,12 @@ class TypeCheckVisitor : ComponentVisitor<Unit> {
 
 private class IntegerExpressionTypeCheckVisitor : ComponentVisitor<Unit> {
     override fun visitBinaryExpression(expression: BinaryExpression) {
-        if (!expression.operation.isInteger()) {
-            throw TypeErrorException("Integer operation expected, boolean found")
+        val operandsVisitor = when (expression.operation) {
+            Addition, Multiplication, Subtraction -> IntegerExpressionTypeCheckVisitor()
+            else -> throw TypeErrorException("Integer operation expected, ${expression.operation} found")
         }
-        expression.leftExpression.accept(IntegerExpressionTypeCheckVisitor())
-        expression.rightExpression.accept(IntegerExpressionTypeCheckVisitor())
+        expression.leftExpression.accept(operandsVisitor)
+        expression.rightExpression.accept(operandsVisitor)
     }
 }
 
@@ -32,10 +33,12 @@ private class BooleanExpressionTypeCheckVisitor : ComponentVisitor<Unit> {
     }
 
     override fun visitBinaryExpression(expression: BinaryExpression) {
-        if (!expression.operation.isBoolean()) {
-            throw TypeErrorException("Boolean operation expected, integer found")
+        val operandsVisitor = when (expression.operation) {
+            And, Or -> BooleanExpressionTypeCheckVisitor()
+            Less, Greater, Equality -> IntegerExpressionTypeCheckVisitor()
+            else -> throw TypeErrorException("Boolean operation expected, ${expression.operation} found")
         }
-        expression.leftExpression.accept(IntegerExpressionTypeCheckVisitor())
-        expression.rightExpression.accept(IntegerExpressionTypeCheckVisitor())
+        expression.leftExpression.accept(operandsVisitor)
+        expression.rightExpression.accept(operandsVisitor)
     }
 }
