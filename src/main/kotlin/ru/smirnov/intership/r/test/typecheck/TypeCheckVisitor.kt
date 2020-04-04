@@ -19,13 +19,25 @@ class TypeCheckVisitor : ComponentVisitor<Unit> {
 
 /** Checks expression that should have integer return type */
 private class IntegerExpressionTypeCheckVisitor : ComponentVisitor<Unit> {
-    override fun visitBinaryExpression(expression: BinaryExpression) {
-        val operandsVisitor = when (expression.operation) {
-            Addition, Multiplication, Subtraction -> IntegerExpressionTypeCheckVisitor()
-            else -> throw TypeErrorException("Integer operation expected, ${expression.operation} found")
-        }
+    override fun visitAddition(expression: Addition) {
+        visitChildren(expression, IntegerExpressionTypeCheckVisitor())
+    }
+
+    override fun visitMultiplication(expression: Multiplication){
+        visitChildren(expression, IntegerExpressionTypeCheckVisitor())
+    }
+
+    override fun visitSubtraction(expression: Subtraction) {
+        visitChildren(expression, IntegerExpressionTypeCheckVisitor())
+    }
+
+    private fun visitChildren(expression: BinaryExpression, operandsVisitor: ComponentVisitor<Unit>) {
         expression.leftExpression.accept(operandsVisitor)
         expression.rightExpression.accept(operandsVisitor)
+    }
+
+    override fun visitBinaryExpression(expression: BinaryExpression) {
+        throw TypeErrorException("Integer operation expected, ${expression.operationString()} found")
     }
 }
 
@@ -39,13 +51,32 @@ private class BooleanExpressionTypeCheckVisitor : ComponentVisitor<Unit> {
         throw TypeErrorException("Boolean expression expected, constant found")
     }
 
-    override fun visitBinaryExpression(expression: BinaryExpression) {
-        val operandsVisitor = when (expression.operation) {
-            And, Or -> BooleanExpressionTypeCheckVisitor()
-            Less, Greater, Equality -> IntegerExpressionTypeCheckVisitor()
-            else -> throw TypeErrorException("Boolean operation expected, ${expression.operation} found")
-        }
+    override fun visitAnd(expression: And)  {
+        visitChildren(expression, BooleanExpressionTypeCheckVisitor())
+    }
+
+    override fun visitOr(expression: Or) {
+        visitChildren(expression, BooleanExpressionTypeCheckVisitor())
+    }
+
+    override fun visitLess(expression: Less) {
+        visitChildren(expression, IntegerExpressionTypeCheckVisitor())
+    }
+
+    override fun visitGreater(expression: Greater) {
+        visitChildren(expression, IntegerExpressionTypeCheckVisitor())
+    }
+
+    override fun visitEquality(expression: Equality) {
+        visitChildren(expression, IntegerExpressionTypeCheckVisitor())
+    }
+
+    private fun visitChildren(expression: BinaryExpression, operandsVisitor: ComponentVisitor<Unit>) {
         expression.leftExpression.accept(operandsVisitor)
         expression.rightExpression.accept(operandsVisitor)
+    }
+
+    override fun visitBinaryExpression(expression: BinaryExpression) {
+        throw TypeErrorException("Boolean operation expected, ${expression.operationString()} found")
     }
 }

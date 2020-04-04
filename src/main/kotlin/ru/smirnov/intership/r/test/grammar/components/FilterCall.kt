@@ -5,7 +5,7 @@ package ru.smirnov.intership.r.test.grammar.components
  *
  * Filter expression should have boolean return type
  */
-class FilterCall(val expression: Expression) : Call {
+data class FilterCall(val expression: Expression) : Call {
     override fun <T> accept(visitor: ComponentVisitor<T>): T? {
         return visitor.visitFilterCall(this)
     }
@@ -14,9 +14,5 @@ class FilterCall(val expression: Expression) : Call {
         builder.append("filter{")
         expression.buildString(builder)
         builder.append("}")
-    }
-
-    override fun equals(other: Any?): Boolean {
-        return other is FilterCall && other.expression == expression
     }
 }

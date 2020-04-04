@@ -9,7 +9,7 @@ class ParserTest {
     fun shouldParseOneCall() {
         val expected = CallChain(
             listOf(
-                FilterCall(ElementExpression())
+                FilterCall(ElementExpression)
             )
         )
         assertEquals(expected, Parser().parse("filter{element}"))
@@ -20,7 +20,7 @@ class ParserTest {
         val expected = CallChain(
             listOf(
                 FilterCall (
-                    BinaryExpression(ElementExpression(), ElementExpression(), Addition)
+                    Addition(ElementExpression, ElementExpression)
                 )
             )
         )
@@ -44,14 +44,12 @@ class ParserTest {
         val expected = CallChain(
             listOf(
                 FilterCall (
-                    BinaryExpression(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("42"),
-                            Subtraction
+                    Multiplication(
+                        Subtraction(
+                            ElementExpression,
+                            ConstantExpression("42")
                         ),
-                        ConstantExpression("-42"),
-                        Multiplication
+                        ConstantExpression("-42")
                     )
                 )
             )
@@ -64,29 +62,25 @@ class ParserTest {
         val expected = CallChain(
             listOf(
                 FilterCall (
-                    BinaryExpression(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("42"),
-                            Subtraction
+                    Multiplication(
+                        Subtraction(
+                            ElementExpression,
+                            ConstantExpression("42")
                         ),
-                        ConstantExpression("-42"),
-                        Multiplication
+                        ConstantExpression("-42")
                     )
                 ),
                 MapCall(
-                    BinaryExpression(
-                        BinaryExpression(
+                    Multiplication(
+                        Subtraction(
                             ConstantExpression("-42"),
-                            ConstantExpression("-42"),
-                            Subtraction
+                            ConstantExpression("-42")
                         ),
-                        ElementExpression(),
-                        Multiplication
+                        ElementExpression
                     )
                 ),
                 MapCall(
-                    ElementExpression()
+                    ElementExpression
                 )
             )
         )
@@ -100,17 +94,15 @@ class ParserTest {
         val expected = CallChain(
             listOf(
                 FilterCall(
-                    BinaryExpression(
-                        ElementExpression(),
-                        ConstantExpression("10"),
-                        Greater
+                    Greater(
+                        ElementExpression,
+                        ConstantExpression("10")
                     )
                 ),
                 FilterCall(
-                    BinaryExpression(
-                        ElementExpression(),
-                        ConstantExpression("20"),
-                        Less
+                    Less(
+                        ElementExpression,
+                        ConstantExpression("20")
                     )
                 )
             )
@@ -123,22 +115,19 @@ class ParserTest {
         val expected = CallChain(
             listOf(
                 FilterCall(
-                    BinaryExpression(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("10"),
-                            Greater
+                    And(
+                        Greater(
+                            ElementExpression,
+                            ConstantExpression("10")
                         ),
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("20"),
-                            Less
-                        ),
-                        And
+                        Less(
+                            ElementExpression,
+                            ConstantExpression("20")
+                        )
                     )
                 ),
                 MapCall(
-                    ElementExpression()
+                    ElementExpression
                 )
             )
         )
@@ -150,24 +139,21 @@ class ParserTest {
         val expected = CallChain(
             listOf(
                 MapCall(
-                    BinaryExpression(
-                        ElementExpression(),
-                        ConstantExpression("10"),
-                        Addition
+                    Addition(
+                        ElementExpression,
+                        ConstantExpression("10")
                     )
                 ),
                 FilterCall(
-                    BinaryExpression(
-                        ElementExpression(),
-                        ConstantExpression("10"),
-                        Greater
+                    Greater(
+                        ElementExpression,
+                        ConstantExpression("10")
                     )
                 ),
                 MapCall(
-                    BinaryExpression(
-                        ElementExpression(),
-                        ElementExpression(),
-                        Multiplication
+                    Multiplication(
+                        ElementExpression,
+                        ElementExpression
                     )
                 )
             )
@@ -182,29 +168,24 @@ class ParserTest {
         val expected = CallChain(
             listOf(
                 FilterCall(
-                    BinaryExpression(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("10"),
-                            Addition
+                    Greater(
+                        Addition(
+                            ElementExpression,
+                            ConstantExpression("10")
                         ),
-                        ConstantExpression("10"),
-                        Greater
+                        ConstantExpression("10")
                     )
                 ),
                 MapCall(
-                    BinaryExpression(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("10"),
-                            Addition
+                    Multiplication(
+                        Addition(
+                            ElementExpression,
+                            ConstantExpression("10")
                         ),
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("10"),
-                            Addition
-                        ),
-                        Multiplication
+                        Addition(
+                            ElementExpression,
+                            ConstantExpression("10")
+                        )
                     )
                 )
             )
@@ -219,29 +200,24 @@ class ParserTest {
         val expected = CallChain(
             listOf(
                 FilterCall(
-                    BinaryExpression(
-                        ElementExpression(),
-                        ConstantExpression("0"),
-                        Greater
+                    Greater(
+                        ElementExpression,
+                        ConstantExpression("0")
                     )
                 ),
                 MapCall(
-                    BinaryExpression(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ElementExpression(),
-                            Multiplication
+                    Addition(
+                        Multiplication(
+                            ElementExpression,
+                            ElementExpression
                         ),
-                        BinaryExpression(
-                            BinaryExpression(
-                                ElementExpression(),
-                                ConstantExpression("20"),
-                                Multiplication
+                        Addition(
+                            Multiplication(
+                                ElementExpression,
+                                ConstantExpression("20")
                             ),
-                            ConstantExpression("100"),
-                            Addition
-                        ),
-                        Addition
+                            ConstantExpression("100")
+                        )
                     )
                 )
             )
@@ -256,24 +232,21 @@ class ParserTest {
         val expected = CallChain(
             listOf(
                 FilterCall(
-                    BinaryExpression(
-                        ElementExpression(),
-                        ConstantExpression("0"),
-                        Greater
+                    Greater(
+                        ElementExpression,
+                        ConstantExpression("0")
                     )
                 ),
                 FilterCall(
-                    BinaryExpression(
-                        ElementExpression(),
-                        ConstantExpression("0"),
-                        Less
+                    Less(
+                        ElementExpression,
+                        ConstantExpression("0")
                     )
                 ),
                 MapCall(
-                    BinaryExpression(
-                        ElementExpression(),
-                        ElementExpression(),
-                        Multiplication
+                    Multiplication(
+                        ElementExpression,
+                        ElementExpression
                     )
                 )
             )
@@ -288,14 +261,13 @@ class ParserTest {
         val expected = CallChain(
             listOf(
                 FilterCall(
-                    BinaryExpression(
+                    Equality(
                         ConstantExpression("1"),
-                        ConstantExpression("0"),
-                        Equality
+                        ConstantExpression("0")
                     )
                 ),
                 MapCall(
-                    ElementExpression()
+                    ElementExpression
                 )
             )
         )

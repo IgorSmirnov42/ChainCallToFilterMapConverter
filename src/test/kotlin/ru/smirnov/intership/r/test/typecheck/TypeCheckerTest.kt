@@ -10,7 +10,7 @@ class TypeCheckerTest {
             CallChain(
                 listOf(
                     MapCall(
-                        ElementExpression()
+                        ElementExpression
                     )
                 )
             )
@@ -23,10 +23,9 @@ class TypeCheckerTest {
             CallChain(
                 listOf(
                     MapCall(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("-42"),
-                            Subtraction
+                        Subtraction(
+                            ElementExpression,
+                            ConstantExpression("-42")
                         )
                     )
                 )
@@ -40,7 +39,7 @@ class TypeCheckerTest {
             CallChain(
                 listOf(
                     FilterCall(
-                        ElementExpression()
+                        ElementExpression
                     )
                 )
             )
@@ -53,18 +52,15 @@ class TypeCheckerTest {
             CallChain(
                 listOf(
                     FilterCall(
-                        BinaryExpression(
-                            BinaryExpression(
-                                ElementExpression(),
-                                ConstantExpression("42"),
-                                Greater
+                        And(
+                            Greater(
+                                ElementExpression,
+                                ConstantExpression("42")
                             ),
-                            BinaryExpression(
+                            Addition(
                                 ConstantExpression("42"),
-                                ConstantExpression("23"),
-                                Addition
-                            ),
-                            And
+                                ConstantExpression("23")
+                            )
                         )
                     )
                 )
@@ -78,22 +74,18 @@ class TypeCheckerTest {
             CallChain(
                 listOf(
                     FilterCall(
-                        BinaryExpression(
-                            BinaryExpression(
-                                ElementExpression(),
-                                ConstantExpression("42"),
-                                Greater
+                        And(
+                            Greater(
+                                ElementExpression,
+                                ConstantExpression("42")
                             ),
-                            BinaryExpression(
-                                BinaryExpression(
-                                    ElementExpression(),
-                                    ConstantExpression("-42"),
-                                    Multiplication
+                            Less(
+                                Multiplication(
+                                    ElementExpression,
+                                    ConstantExpression("-42")
                                 ),
-                                ConstantExpression("23"),
-                                Less
-                            ),
-                            And
+                                ConstantExpression("23")
+                            )
                         )
                     )
                 )
@@ -107,10 +99,9 @@ class TypeCheckerTest {
             CallChain(
                 listOf(
                     MapCall(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ElementExpression(),
-                            Equality
+                        Equality(
+                            ElementExpression,
+                            ElementExpression
                         )
                     )
                 )
@@ -124,17 +115,15 @@ class TypeCheckerTest {
             CallChain(
                 listOf(
                     FilterCall(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("10"),
-                            Greater
+                        Greater(
+                            ElementExpression,
+                            ConstantExpression("10")
                         )
                     ),
                     FilterCall(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("20"),
-                            Less
+                        Less(
+                            ElementExpression,
+                            ConstantExpression("20")
                         )
                     )
                 )
@@ -148,22 +137,19 @@ class TypeCheckerTest {
             CallChain(
                 listOf(
                     FilterCall(
-                        BinaryExpression(
-                            BinaryExpression(
-                                ElementExpression(),
-                                ConstantExpression("10"),
-                                Greater
+                        And(
+                            Greater(
+                                ElementExpression,
+                                ConstantExpression("10")
                             ),
-                            BinaryExpression(
-                                ElementExpression(),
-                                ConstantExpression("20"),
-                                Less
-                            ),
-                            And
+                            Less(
+                                ElementExpression,
+                                ConstantExpression("20")
+                            )
                         )
                     ),
                     MapCall(
-                        ElementExpression()
+                        ElementExpression
                     )
                 )
             )
@@ -176,24 +162,21 @@ class TypeCheckerTest {
             CallChain(
                 listOf(
                     MapCall(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("10"),
-                            Addition
+                        Addition(
+                            ElementExpression,
+                            ConstantExpression("10")
                         )
                     ),
                     FilterCall(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("10"),
-                            Greater
+                        Greater(
+                            ElementExpression,
+                            ConstantExpression("10")
                         )
                     ),
                     MapCall(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ElementExpression(),
-                            Multiplication
+                        Multiplication(
+                            ElementExpression,
+                            ElementExpression
                         )
                     )
                 )
@@ -207,29 +190,24 @@ class TypeCheckerTest {
             CallChain(
                 listOf(
                     FilterCall(
-                        BinaryExpression(
-                            BinaryExpression(
-                                ElementExpression(),
-                                ConstantExpression("10"),
-                                Addition
+                        Greater(
+                            Addition(
+                                ElementExpression,
+                                ConstantExpression("10")
                             ),
-                            ConstantExpression("10"),
-                            Greater
+                            ConstantExpression("10")
                         )
                     ),
                     MapCall(
-                        BinaryExpression(
-                            BinaryExpression(
-                                ElementExpression(),
-                                ConstantExpression("10"),
-                                Addition
+                        Multiplication(
+                            Addition(
+                                ElementExpression,
+                                ConstantExpression("10")
                             ),
-                            BinaryExpression(
-                                ElementExpression(),
-                                ConstantExpression("10"),
-                                Addition
-                            ),
-                            Multiplication
+                            Addition(
+                                ElementExpression,
+                                ConstantExpression("10")
+                            )
                         )
                     )
                 )
@@ -243,29 +221,24 @@ class TypeCheckerTest {
             CallChain(
                 listOf(
                     FilterCall(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("0"),
-                            Greater
+                        Greater(
+                            ElementExpression,
+                            ConstantExpression("0")
                         )
                     ),
                     MapCall(
-                        BinaryExpression(
-                            BinaryExpression(
-                                ElementExpression(),
-                                ElementExpression(),
-                                Multiplication
+                        Addition(
+                            Multiplication(
+                                ElementExpression,
+                                ElementExpression
                             ),
-                            BinaryExpression(
-                                BinaryExpression(
-                                    ElementExpression(),
-                                    ConstantExpression("20"),
-                                    Multiplication
+                            Addition(
+                                Multiplication(
+                                    ElementExpression,
+                                    ConstantExpression("20")
                                 ),
-                                ConstantExpression("100"),
-                                Addition
-                            ),
-                            Addition
+                                ConstantExpression("100")
+                            )
                         )
                     )
                 )
@@ -279,24 +252,21 @@ class TypeCheckerTest {
             CallChain(
                 listOf(
                     FilterCall(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("0"),
-                            Greater
+                        Greater(
+                            ElementExpression,
+                            ConstantExpression("0")
                         )
                     ),
                     FilterCall(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("0"),
-                            Less
+                        Less(
+                            ElementExpression,
+                            ConstantExpression("0")
                         )
                     ),
                     MapCall(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ElementExpression(),
-                            Multiplication
+                        Multiplication(
+                            ElementExpression,
+                            ElementExpression
                         )
                     )
                 )
@@ -310,14 +280,13 @@ class TypeCheckerTest {
             CallChain(
                 listOf(
                     FilterCall(
-                        BinaryExpression(
+                        Equality(
                             ConstantExpression("1"),
-                            ConstantExpression("0"),
-                            Equality
+                            ConstantExpression("0")
                         )
                     ),
                     MapCall(
-                        ElementExpression()
+                        ElementExpression
                     )
                 )
             )

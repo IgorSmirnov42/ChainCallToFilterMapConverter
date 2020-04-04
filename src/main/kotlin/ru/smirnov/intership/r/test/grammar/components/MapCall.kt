@@ -5,7 +5,7 @@ package ru.smirnov.intership.r.test.grammar.components
  *
  * Map expression should have integer return type
  */
-class MapCall(val expression: Expression) : Call {
+data class MapCall(val expression: Expression) : Call {
     override fun <T> accept(visitor: ComponentVisitor<T>): T? {
         return visitor.visitMapCall(this)
     }
@@ -14,9 +14,5 @@ class MapCall(val expression: Expression) : Call {
         builder.append("map{")
         expression.buildString(builder)
         builder.append("}")
-    }
-
-    override fun equals(other: Any?): Boolean {
-        return other is MapCall && other.expression == expression
     }
 }

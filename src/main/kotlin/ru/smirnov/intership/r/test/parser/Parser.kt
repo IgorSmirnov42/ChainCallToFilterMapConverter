@@ -25,7 +25,9 @@ class Parser {
             val parser = ArrayFilterMapParser(CommonTokenStream(lexer))
             return parser.callChain().accept(CallChainVisitor())
         } catch (exception: RuntimeException) {
-            throw ParserException(exception.message ?: "")
+            throw ParserException(exception.message ?: "").apply {
+                initCause(exception)
+            }
         }
     }
 }

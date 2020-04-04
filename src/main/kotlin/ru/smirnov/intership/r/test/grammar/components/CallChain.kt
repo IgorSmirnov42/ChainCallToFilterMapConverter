@@ -3,13 +3,9 @@ package ru.smirnov.intership.r.test.grammar.components
 /**
  * One sequence of command to be executed on array.
  */
-class CallChain(val calls: List<Call>) {
+data class CallChain(val calls: List<Call>) {
     fun <T> accept(visitor: ComponentVisitor<T>): T? {
         return visitor.visitCallChain(this)
-    }
-
-    override fun equals(other: Any?): Boolean {
-        return other is CallChain && other.calls == this.calls
     }
 
     override fun toString(): String {

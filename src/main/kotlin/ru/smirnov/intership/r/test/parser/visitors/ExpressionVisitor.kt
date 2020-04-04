@@ -7,9 +7,9 @@ import ru.smirnov.intership.r.test.grammar.components.*
 /** Parses expressions */
 class ExpressionVisitor : ArrayFilterMapBaseVisitor<Expression>() {
     override fun visitBinaryExpression(ctx: ArrayFilterMapParser.BinaryExpressionContext): Expression {
-        return BinaryExpression(ctx.expression(0).accept(this),
-                                ctx.expression(1).accept(this),
-                                Operation.fromString(ctx.operation().text))
+        return BinaryExpression.create(ctx.operation().text,
+                                ctx.expression(0).accept(this),
+                                ctx.expression(1).accept(this))
     }
 
     override fun visitConstantExpression(ctx: ArrayFilterMapParser.ConstantExpressionContext): Expression {
@@ -17,6 +17,6 @@ class ExpressionVisitor : ArrayFilterMapBaseVisitor<Expression>() {
     }
 
     override fun visitElement(ctx: ArrayFilterMapParser.ElementContext): Expression {
-        return ElementExpression()
+        return ElementExpression
     }
 }

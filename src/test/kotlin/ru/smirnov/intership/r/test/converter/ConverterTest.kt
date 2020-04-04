@@ -11,7 +11,7 @@ class ConverterTest {
             CallChain(
                 listOf(
                     MapCall(
-                        ElementExpression()
+                        ElementExpression
                     )
                 )
             )
@@ -19,14 +19,13 @@ class ConverterTest {
         val expected = CallChain(
             listOf(
                 FilterCall(
-                    BinaryExpression(
+                    Equality(
                         ConstantExpression("1"),
-                        ConstantExpression("1"),
-                        Equality
+                        ConstantExpression("1")
                     )
                 ),
                 MapCall(
-                    ElementExpression()
+                    ElementExpression
                 )
             )
         )
@@ -39,10 +38,9 @@ class ConverterTest {
             CallChain(
                 listOf(
                     FilterCall(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("42"),
-                            Greater
+                        Greater(
+                            ElementExpression,
+                            ConstantExpression("42")
                         )
                     )
                 )
@@ -51,14 +49,13 @@ class ConverterTest {
         val expected = CallChain(
             listOf(
                 FilterCall(
-                    BinaryExpression(
-                        ElementExpression(),
-                        ConstantExpression("42"),
-                        Greater
+                    Greater(
+                        ElementExpression,
+                        ConstantExpression("42")
                     )
                 ),
                 MapCall(
-                    ElementExpression()
+                    ElementExpression
                 )
             )
         )
@@ -70,22 +67,19 @@ class ConverterTest {
         val expected = CallChain(
             listOf(
                 FilterCall(
-                    BinaryExpression(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("10"),
-                            Greater
+                    And(
+                        Greater(
+                            ElementExpression,
+                            ConstantExpression("10")
                         ),
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("20"),
-                            Less
-                        ),
-                        And
+                        Less(
+                            ElementExpression,
+                            ConstantExpression("20")
+                        )
                     )
                 ),
                 MapCall(
-                    ElementExpression()
+                    ElementExpression
                 )
             )
         )
@@ -99,17 +93,15 @@ class ConverterTest {
             CallChain(
                 listOf(
                     FilterCall(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("10"),
-                            Greater
+                        Greater(
+                            ElementExpression,
+                            ConstantExpression("10")
                         )
                     ),
                     FilterCall(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("20"),
-                            Less
+                        Less(
+                            ElementExpression,
+                            ConstantExpression("20")
                         )
                     )
                 )
@@ -118,22 +110,19 @@ class ConverterTest {
         val expected = CallChain(
             listOf(
                 FilterCall(
-                    BinaryExpression(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("10"),
-                            Greater
+                    And(
+                        Greater(
+                            ElementExpression,
+                            ConstantExpression("10")
                         ),
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("20"),
-                            Less
-                        ),
-                        And
+                        Less(
+                            ElementExpression,
+                            ConstantExpression("20")
+                        )
                     )
                 ),
                 MapCall(
-                    ElementExpression()
+                    ElementExpression
                 )
             )
         )
@@ -146,24 +135,21 @@ class ConverterTest {
             CallChain(
                 listOf(
                     MapCall(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("10"),
-                            Addition
+                        Addition(
+                            ElementExpression,
+                            ConstantExpression("10")
                         )
                     ),
                     FilterCall(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("10"),
-                            Greater
+                        Greater(
+                            ElementExpression,
+                            ConstantExpression("10")
                         )
                     ),
                     MapCall(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ElementExpression(),
-                            Multiplication
+                        Multiplication(
+                            ElementExpression,
+                            ElementExpression
                         )
                     )
                 )
@@ -172,29 +158,24 @@ class ConverterTest {
         val expected = CallChain(
             listOf(
                 FilterCall(
-                    BinaryExpression(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("10"),
-                            Addition
+                    Greater(
+                        Addition(
+                            ElementExpression,
+                            ConstantExpression("10")
                         ),
-                        ConstantExpression("10"),
-                        Greater
+                        ConstantExpression("10")
                     )
                 ),
                 MapCall(
-                    BinaryExpression(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("10"),
-                            Addition
+                    Multiplication(
+                        Addition(
+                            ElementExpression,
+                            ConstantExpression("10")
                         ),
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("10"),
-                            Addition
-                        ),
-                        Multiplication
+                        Addition(
+                            ElementExpression,
+                            ConstantExpression("10")
+                        )
                     )
                 )
             )
@@ -208,24 +189,21 @@ class ConverterTest {
             CallChain(
                 listOf(
                     FilterCall(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("0"),
-                            Greater
+                        Greater(
+                            ElementExpression,
+                            ConstantExpression("0")
                         )
                     ),
                     FilterCall(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("0"),
-                            Less
+                        Less(
+                            ElementExpression,
+                            ConstantExpression("0")
                         )
                     ),
                     MapCall(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ElementExpression(),
-                            Multiplication
+                        Multiplication(
+                            ElementExpression,
+                            ElementExpression
                         )
                     )
                 )
@@ -234,25 +212,21 @@ class ConverterTest {
         val expected = CallChain(
             listOf(
                 FilterCall(
-                    BinaryExpression(
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("0"),
-                            Greater
+                    And(
+                        Greater(
+                            ElementExpression,
+                            ConstantExpression("0")
                         ),
-                        BinaryExpression(
-                            ElementExpression(),
-                            ConstantExpression("0"),
-                            Less
-                        ),
-                        And
+                        Less(
+                            ElementExpression,
+                            ConstantExpression("0")
+                        )
                     )
                 ),
                 MapCall(
-                    BinaryExpression(
-                        ElementExpression(),
-                        ElementExpression(),
-                        Multiplication
+                    Multiplication(
+                        ElementExpression,
+                        ElementExpression
                     )
                 )
             )
